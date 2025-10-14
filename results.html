@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Workout Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1rem;
+      background: #fff;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      margin-top: 1.5rem;
+    }
+
+    ul {
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Your Workout</h1>
+  <div id="results"></div>
+
+  <a href="workoutplanner.html">Back to Planner</a>
+
+  <script>
+    // --- Data setup ---
+    const exercises = {
+      1: {
+        name: "Ankles",
+        motions: {
+          extension: [
+            { name: "Toe squats", equipment: "none" },
+            { name: "Toe presses with OH dumbbells", equipment: "dumbbells" },
+            { name: "Farmer's walk on toes", equipment: "dumbbells" }
+          ],
+          deepextension: [
+            { name: "Rower rail extensions", equipment: "none" },
+            { name: "One-foot ankle extensions with forward leaning twist", equipment: "none" },
+            { name: "Forward leaning band extensions", equipment: "bands" }
+          ],
+          dorsiflex: [
+            { name: "Seated alternating toe flexes", equipment: "bands" },
+            { name: "One-leg toe flexes (on back)", equipment: "none" },
+            { name: "Figure 4 flexes (on back)", equipment: "tealband" }
+          ]
+        }
+      },
+      2: {
+        name: "Legs",
+        motions: {
+          squat: [
+            { name: "Goblet squats", equipment: "none" },
+            { name: "TRX squats", equipment: "TRX" },
+            { name: "Sissy squats", equipment: "none" },
+            { name: "Toe squats", equipment: "none" },
+            { name: "Natural leg extensions", equipment: "none" },
+            { name: "Jump squats", equipment: "none" }
+          ],
+          lunge: [
+            { name: "Step-back lunges", equipment: "dumbbells" },
+            { name: "ATG lunges", equipment: "none" },
+            { name: "Step-back step-up lunges with band on neck", equipment: "tealband" },
+            { name: "Stool step-downs", equipment: "none" }
+          ],
+          curl: [
+            { name: "TRX hammy curls", equipment: "TRX" },
+            { name: "One-leg hammy curl (on block)", equipment: "bands" },
+            { name: "Hanging hammy curls with ball between feet", equipment: "none" },
+            { name: "Nordic curls", equipment: "none" }
+          ]
+        }
+      },
+      3: {
+        name: "Hips",
+        motions: {
+          sideextension: [
+            { name: "Counter-supported leg lifts to side and behind", equipment: "none" },
+            { name: "Crab walks", equipment: "greyband" },
+            { name: "Leg swings to side", equipment: "bands" },
+            { name: "Clamshells", equipment: "bands" },
+            { name: "Fire hydrants", equipment: "none" }
+          ],
+          rearextension: [
+            { name: "Slider pushbacks in push-up position", equipment: "bands" },
+            { name: "Standing kickbacks", equipment: "bands" },
+            { name: "Counter handstand single-leg extension", equipment: "yellowband" }
+          ],
+          crossover: [
+            { name: "Downward dog split sliders", equipment: "none" },
+            { name: "Foot-slider half circles", equipment: "bands" },
+            { name: "Standing foot-to-hand crossovers", equipment: "bands" }
+          ]
+        }
+      },
+      4: {
+        name: "Lower Back",
+        motions: {
+          hyperextension: [
+            { name: "Stool hyperextensions", equipment: "yellowband" },
+            { name: "Arabesque alternate leg/arm lift", equipment: "none" },
+            { name: "Bird dogs", equipment: "bands" },
+            { name: "One-foot-raised-behind hyperextensions", equipment: "none" }
+          ],
+          extension: [
+            { name: "Bridges", equipment: "tealband" },
+            { name: "Single-leg glute bridge", equipment: "none" },
+            { name: "Deadlifts standing on stool", equipment: "bands" },
+            { name: "One-leg deadlifts", equipment: "dumbbells" }
+          ],
+          angle: [
+            { name: "Bent press", equipment: "dumbbells" },
+            { name: "Reverse angled band pullover", equipment: "bands" },
+            { name: "Angled leg lift", equipment: "none" }
+          ]
+        }
+      },
+      5: {
+        name: "Abs",
+        motions: {
+          seated: [
+            { name: "Crunchy frogs", equipment: "none" },
+            { name: "Seated crunches holding roller with feet", equipment: "none" },
+            { name: "Butt balance heel touch toe touch crunches", equipment: "none" },
+            { name: "Seated crunches braced on CVT", equipment: "none" }
+          ],
+          obliques: [
+            { name: "Side plank hip lifts", equipment: "none" },
+            { name: "Lateral v-ups", equipment: "none" },
+            { name: "Stool oblique door-feet band-to-bar crunch", equipment: "tealband" },
+            { name: "Stool seated basketball toe touches", equipment: "none" }
+          ],
+          pullover: [
+            { name: "Hanging leg lifts", equipment: "none" },
+            { name: "Lying band pullovers", equipment: "yellowband" },
+            { name: "Lying dumbbell pullovers", equipment: "dumbbells" }
+          ]
+        }
+      },
+      6: {
+        name: "Chest",
+        motions: {
+          pushtogether: [
+            { name: "Double band CVT press", equipment: "bands" },
+            { name: "Rower rail pushups", equipment: "none" },
+            { name: "Basketball pushups", equipment: "none" },
+            { name: "Pushups", equipment: "none" }
+          ],
+          pressup: [
+            { name: "Declined pushups (head up)", equipment: "none" },
+            { name: "Double low band CVT press", equipment: "bands" },
+            { name: "Double band press (foot-to-face)", equipment: "bands" },
+            { name: "2-corner low-point band press", equipment: "bands" }
+          ],
+          fly: [
+            { name: "One-arm chest fly", equipment: "bands" },
+            { name: "Stool dumbbell fly", equipment: "dumbbells" },
+            { name: "Fly pushups", equipment: "sliders" }
+          ]
+        }
+      },
+      7: {
+        name: "Upper Back",
+        motions: {
+          pulldowns: [
+            { name: "Chinups", equipment: "none" },
+            { name: "Tree climbers", equipment: "none" },
+            { name: "Ceiling pulldowns", equipment: "bands" },
+            { name: "Handstand one-arm dumbbell fly", equipment: "dumbbells" }
+          ],
+          pullups: [
+            { name: "Heavy pants", equipment: "dumbbells" },
+            { name: "Band-to-MaxT rows", equipment: "dumbbells" },
+            { name: "Bent-over row flys", equipment: "dumbbells" },
+            { name: "Band-augmented lawn mowers", equipment: "dumbbells" }
+          ],
+          fly: [
+            { name: "Head-to-wall back flys", equipment: "dumbbells" },
+            { name: "Back flys (leaning forward)", equipment: "dumbbells" },
+            { name: "Foot-on-band cross-body leaning one-arm back fly", equipment: "bands" },
+            { name: "One-arm back flys", equipment: "ribbon" }
+          ]
+        }
+      },
+      8: {
+        name: "Triceps",
+        motions: {
+          kickback: [
+            { name: "Band kickbacks", equipment: "bands" },
+            { name: "Counter dips", equipment: "none" },
+            { name: "Dumbbells kickbacks", equipment: "dumbbells" }
+          ],
+          outfront: [
+            { name: "Side-lying one-arm triceps press", equipment: "none" },
+            { name: "Military push-ups", equipment: "none" },
+            { name: "Counter push-ups with band on neck", equipment: "tealband" },
+            { name: "Diamond push-ups", equipment: "none" }
+          ],
+          overhead: [
+            { name: "Lying skullcrushers", equipment: "dumbbells" },
+            { name: "Standing overhead triceps extensions", equipment: "dumbbells" },
+            { name: "One-arm overhead triceps extensions, band behind body", equipment: "bands" }
+          ]
+        }
+      },
+      9: {
+        name: "Biceps",
+        motions: {
+          curlout: [
+            { name: "Outward bicep curls", equipment: "bands" },
+            { name: "Outward bicep curls", equipment: "dumbbells" },
+            { name: "Alternating 2-out 2-in bicep curls", equipment: "dumbbells" }
+          ],
+          curlfront: [
+            { name: "Bicep curls", equipment: "dumbbells" },
+            { name: "Alternating bicep curls", equipment: "dumbbells" },
+            { name: "Stair-stance bicep curls", equipment: "TRX" }
+          ],
+          curlin: [
+            { name: "Lunge-stance concentration curl", equipment: "dumbbells" },
+            { name: "Stand-on-band cross-body curl", equipment: "bands" },
+            { name: "Alternating cross-body curls", equipment: "dumbbells" }
+          ]
+        }
+      },
+      10: {
+        name: "Shoulders",
+        motions: {
+          press: [
+            { name: "Overhead press", equipment: "dumbbells" },
+            { name: "Overhead press", equipment: "bands" },
+            { name: "Declined press, head down", equipment: "none" }
+          ],
+          fly: [
+            { name: "Shoulder fly", equipment: "dumbbells" },
+            { name: "Three-way shoulder fly", equipment: "bands" },
+            { name: "Top third shoulder flys", equipment: "dumbbells" },
+            { name: "Face pulls", equipment: "bands" },
+            { name: "Upright rows", equipment: "bands" }
+          ],
+          shrug: [
+            { name: "Shrugs", equipment: "dumbbells" },
+            { name: "Shrugs, standing on stool", equipment: "bands" },
+            { name: "Overhead shrugs", equipment: "golftrainer" }
+          ]
+        }
+      }
+    };
+
+    // --- Helper functions ---
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    function randomChoice(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    // --- Core logic ---
+    const seq = getQueryParam("seq"); // e.g. "3-1-8"
+    const bodyParts = seq ? seq.split("-").map(Number) : [];
+
+    const resultsDiv = document.getElementById("results");
+
+    if (bodyParts.length !== 3) {
+      resultsDiv.innerHTML = "<p>Error: sequence not found or invalid.</p>";
+    } else {
+      // For each body part, prepare a randomized motion order
+      const motionPlans = {};
+      bodyParts.forEach(bodyId => {
+        const bp = exercises[bodyId];
+        if (!bp) return;
+
+        const motions = Object.keys(bp.motions);
+        // Shuffle motions
+        const shuffled = motions.sort(() => Math.random() - 0.5);
+        // Take up to 3 motions (one per cycle)
+        motionPlans[bodyId] = shuffled.slice(0, 3);
+      });
+
+      for (let cycle = 1; cycle <= 3; cycle++) {
+        const usedEquipment = new Set();
+        const cycleExercises = [];
+
+        bodyParts.forEach(bodyId => {
+          const bp = exercises[bodyId];
+          if (!bp) return;
+
+          // Pick the pre-randomized motion for this cycle
+          const motion = motionPlans[bodyId][cycle - 1];
+
+          // Try to find an exercise with unused equipment
+          let available = bp.motions[motion].filter(ex => !usedEquipment.has(ex.equipment));
+          if (available.length === 0) {
+            // Fallback: allow repeats if necessary
+            available = bp.motions[motion];
+          }
+
+          const chosen = randomChoice(available);
+          usedEquipment.add(chosen.equipment);
+          cycleExercises.push(`${bp.name} - ${chosen.name} (${chosen.equipment})`);
+        });
+
+        // Render results
+        const h2 = document.createElement("h2");
+        h2.textContent = `Cycle ${cycle}`;
+        resultsDiv.appendChild(h2);
+
+        const ul = document.createElement("ul");
+        cycleExercises.forEach(ex => {
+          const li = document.createElement("li");
+          li.textContent = ex;
+          ul.appendChild(li);
+        });
+        resultsDiv.appendChild(ul);
+      }
+    }
+
+  </script>
+</body>
+
+</html>
