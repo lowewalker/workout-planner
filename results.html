@@ -50,7 +50,7 @@
           ],
           dorsiflex: [
             { name: "Seated alternating toe flexes", equipment: "bands" },
-            { name: "One-leg toe flexes (on back)", equipment: "none" },
+            { name: "One-leg toe flexes (on back)", equipment: "bands" },
             { name: "Figure 4 flexes (on back)", equipment: "tealband" }
           ]
         }
@@ -299,15 +299,23 @@
           // Pick the pre-randomized motion for this cycle
           const motion = motionPlans[bodyId][cycle - 1];
 
-          // Try to find an exercise with unused equipment
-          let available = bp.motions[motion].filter(ex => !usedEquipment.has(ex.equipment));
-          if (available.length === 0) {
-            // Fallback: allow repeats if necessary
+          // Filter out equipment already used, EXCEPT for "none"
+          let available = bp.motions[motion].filter(ex =>
+            ex.equipment === "none" || !usedEquipment.has(ex.equipment)
+          );
+
+          // If everything else was blocked, allow full list
+          if (available.length === 0) { 
             available = bp.motions[motion];
           }
 
           const chosen = randomChoice(available);
-          usedEquipment.add(chosen.equipment);
+
+          // Only track equipment if it's not "none"
+          if (chosen.equipment !== "none") {
+            usedEquipment.add(chosen.equipment);
+          }
+
           cycleExercises.push(`${bp.name} - ${chosen.name} (${chosen.equipment})`);
         });
 
