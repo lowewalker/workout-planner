@@ -2,81 +2,54 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Workout Sequence</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body,
-    html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      background: white;
-      font-family: sans-serif;
-    }
+	<meta charset="UTF-8">
+	<title>Workout Planner</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body,
+		html {
+			margin: 20px;
+			padding: 0;
+			height: 100%;
+			width: 100%;
+			background: white;
+			font-family: sans-serif;
+			text-align: center;
+			justify-items: center;
+		}
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: repeat(5, 1fr);
-      height: 100%;
-      width: 100%;
-    }
+		h1 {
+			margin-bottom: 2rem;
+		}
 
-    button {
-      width: 100%;
-      height: 100%;
-      font-size: 1.5rem;
-      border: 1px solid #ccc;
-      background: #f5f5f5;
-      transition: background 0.2s, transform 0.1s;
-    }
+		.button-link {
+			display: block;
+			width: 100px;
+			padding: 10px 20px;
+			background-color: #007bff;
+			color: white;
+			text-decoration: none;
+			border-radius: 5px;
+			text-align: center;
+			margin: 1rem auto;
+		}
 
-    button:active {
-      transform: scale(0.98);
-    }
-
-    button.selected {
-      background: #4CAF50;
-      color: white;
-    }
-  </style>
+		.button-link:hover {
+			background-color: #0056b3;
+		}
+	</style>
 </head>
 
+
 <body>
-  <div class="grid">
-    <button data-id="1">Lower Legs</button>
-    <button data-id="2">Legs</button>
-    <button data-id="3">Hips</button>
-    <button data-id="4">Lower Back</button>
-    <button data-id="5">Abs</button>
-    <button data-id="6">Chest</button>
-    <button data-id="7">Upper Back</button>
-    <button data-id="8">Triceps</button>
-    <button data-id="9">Biceps</button>
-    <button data-id="10">Shoulders</button>
-  </div>
+	<h1>Choose Your Workout</h1>
 
-  <script>
-    const buttons = document.querySelectorAll("button");
-    const sequence = [];
+	<a href="bodypartselector.html" class="button-link">3-Body Part Workout</a>
 
-    buttons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        if (!btn.classList.contains("selected") && sequence.length < 3) {
-          btn.classList.add("selected");
-          sequence.push(btn.dataset.id);
+	<a href="mobilityworkout.html" class="button-link">Mobility Workout</a>
 
-          if (sequence.length === 3) {
-            // Redirect to results page with sequence in query string
-            const seqString = sequence.join("-");
-            window.location.href = `results.html?seq=${seqString}`;
-          }
-        }
-      });
-    });
-  </script>
+	<a href="rowingworkout.html" class="button-link">Rowing Workout</a>
+
+
 </body>
-
 </html>
