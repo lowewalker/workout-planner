@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobility Exercise Picker</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      text-align: center;
+      padding: 20px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 12px 24px;
+      cursor: pointer;
+    }
+
+    #results {
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    li {
+      font-size: 16px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Rowing Workout</h1>
+
+  <button onclick="chooseExercises()">
+    Choose Exercises
+  </button>
+
+  <div id="results"></div>
+
+  <a href="index.html">Back to Home</a>
+
+  <script>
+    const abs = [
+      "Pullover with dumbbell press (feet wedged)",
+      "Crunchy frogs",
+      "Foot wedged dumbbell side crunches, single arm",
+      "Dead bugs",
+      "Hollow hold heel touch toe touch",
+      "Side V-ups",
+      "Side plank with hip dips",
+      "Stool basketball rainbows"
+    ];
+
+    const pushups = [
+      "Standard floor push-ups",
+      "P-bar push-ups, standard width",
+      "P-bar push-ups, wide grip",
+      "Single P-bar alternating push-ups",
+      "TRX push-ups",
+      "TRX push-ups, feet elevated",
+      "Declined P-bar push-ups, feet on counter",
+      "Inline P-bar push-up double pumps"
+    ];
+
+    function chooseExercises() {
+      // Copy the arrays so we don't modify the original
+      let shuffledAbs = [...abs];
+      let shuffledPushups = [...pushups];
+
+      // Fisher-Yates shuffle
+      for (let i = shuffledAbs.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledAbs[i], shuffledAbs[j]] = [shuffledAbs[j], shuffledAbs[i]];
+      }
+      for (let i = shuffledPushups.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledPushups[i], shuffledPushups[j]] = [shuffledPushups[j], shuffledPushups[i]];
+      }
+
+      // Take first 4 exercises
+      const selected = shuffledAbs.slice(0, 4);
+      const selectedPushups = shuffledPushups.slice(0, 4);
+
+      // Display results
+      const resultsDiv = document.getElementById("results");
+
+      // Clear previous results
+      resultsDiv.innerHTML = ""; 
+
+      // Render results
+      for (let cycle = 1; cycle <= 4; cycle++) {
+        const cycleExercises = [
+          selected[cycle - 1],
+          selectedPushups[cycle - 1]
+        ];
+
+        const h2 = document.createElement("h2");
+        h2.textContent = `Cycle ${cycle}`;
+        resultsDiv.appendChild(h2);
+
+        const ul = document.createElement("ul");
+        const row = document.createElement("li");
+        ul.appendChild(row);
+        row.textContent = "Row 100 strokes";
+        cycleExercises.forEach(ex => {
+          const li = document.createElement("li");
+          li.textContent = ex;
+          ul.appendChild(li);
+        });
+        resultsDiv.appendChild(ul);
+      }
+
+    }
+  </script>
+
+</body>
+
+</html>
