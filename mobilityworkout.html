@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobility Exercise Picker</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      text-align: center;
+      padding: 20px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 12px 24px;
+      cursor: pointer;
+    }
+
+    #results {
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    li {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Mobility Exercise Picker</h1>
+
+  <button onclick="chooseExercises()">
+    Choose Exercises
+  </button>
+
+  <div id="results"></div>
+
+  <a href="index.html">Back to Home</a>
+
+  <script>
+    const exercises = [
+      "Front back monkey",
+      "Side monkey stand up",
+      "Crab toe taps",
+      "Crab hip extension knee lifts",
+      "Crab elbow-to-knee sit double kickout",
+      "Crab reach overs",
+      "Crab alternating leg under arm up",
+      "Crawl twist hip dips",
+      "Crawl to front kicks",
+      "Lunge to downward dog",
+      "Base jumper to downward dog cross tap",
+      "Base jumper to plank twist knee thrust",
+      "Cossack squats to lunge twist",
+      "Greatest stretch to downward dog",
+      "Mountain climbers",
+      "Elbow side plank leg/arm alternating reach",
+      "Side plank star switches",
+      "Deep squats to handstand hops"
+    ];
+
+    function chooseExercises() {
+      // Copy the array so we don't modify the original
+      let shuffled = [...exercises];
+
+      // Fisher-Yates shuffle
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+
+      // Take first 5 exercises
+      const selected = shuffled.slice(0, 5);
+
+      // Display results
+      const resultsDiv = document.getElementById("results");
+
+      resultsDiv.innerHTML = `
+                <h2>Your Exercises</h2>
+                <ol>
+                    ${selected.map(exercise => `<li>${exercise}</li>`).join("")}
+                </ol>
+            `;
+    }
+  </script>
+
+</body>
+
+</html>
