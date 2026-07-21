@@ -46,19 +46,19 @@
       1: {
         name: "Ankles",
         motions: {
-          extension: [
-            { name: "Toe squats", equipment: "none" },
-            { name: "Toe presses with OH dumbbells", equipment: "dumbbells" },
-            { name: "Farmer's walk on toes", equipment: "dumbbells" }
+          rotation: [
+            { name: "Foot board", equipment: "none" },
+            { name: "Ankle plank rotations", equipment: "none" },
+            { name: "Mini-band toe pull-aparts", equipment: "none" }
           ],
           deepextension: [
-            { name: "Rower rail extensions", equipment: "none" },
+            { name: "Max-T rail extensions", equipment: "none" },
             { name: "One-foot ankle extensions with forward leaning twist", equipment: "none" },
-            { name: "Forward leaning band extensions", equipment: "bands" }
+            { name: "Toe presses with OH dumbbells", equipment: "dumbbells" }
           ],
           dorsiflex: [
             { name: "Seated alternating toe flexes", equipment: "bands" },
-            { name: "One-leg toe flexes (on back)", equipment: "bands" },
+            { name: "One-leg straight-leg toe flexes (on back)", equipment: "bands" },
             { name: "Figure 4 flexes (on back)", equipment: "tealband" }
           ]
         }
@@ -76,7 +76,6 @@
           lunge: [
             { name: "Step-back lunges", equipment: "dumbbells" },
             { name: "Bulgarian split squats", equipment: "none" },
-            { name: "ATG lunges", equipment: "none" },
             { name: "Step-back step-up lunges with band on neck", equipment: "tealband" },
             { name: "Stool step-downs", equipment: "none" }
           ],
@@ -91,17 +90,15 @@
       3: {
         name: "Hips",
         motions: {
-          sideextension: [
+          straight_leg_abduction: [
             { name: "Counter-supported leg lifts to side and behind", equipment: "none" },
             { name: "Crab walks", equipment: "greyband" },
-            { name: "Leg swings to side", equipment: "bands" },
-            { name: "Clamshells", equipment: "bands" },
-            { name: "Fire hydrants", equipment: "none" }
+            { name: "Leg swings to side", equipment: "bands" }
           ],
-          rearextension: [
-            { name: "Slider pushbacks in push-up position", equipment: "bands" },
-            { name: "Standing kickbacks", equipment: "bands" },
-            { name: "Counter handstand single-leg extension", equipment: "yellowband" }
+          bent_leg_abduction: [
+            { name: "Downward dog side kicks", equipment: "none" },
+            { name: "Clamshells", equipment: "none" },
+            { name: "Fire hydrants", equipment: "none" }
           ],
           crossover: [
             { name: "Downward dog split sliders", equipment: "none" },
@@ -111,24 +108,22 @@
         }
       },
       4: {
-        name: "Lower Back",
+        name: "Glutes",
         motions: {
-          hyperextension: [
-            { name: "Stool hyperextensions", equipment: "yellowband" },
-            { name: "Arabesque alternate leg/arm lift", equipment: "none" },
-            { name: "Bird dogs", equipment: "bands" },
-            { name: "One-foot-raised-behind hyperextensions", equipment: "none" }
-          ],
-          extension: [
+          hip_extension: [
+            { name: "Bench hip extension", equipment: "dumbbells" },
             { name: "Bridges", equipment: "tealband" },
-            { name: "Single-leg glute bridge", equipment: "none" },
-            { name: "Deadlifts standing on stool", equipment: "bands" },
-            { name: "One-leg deadlifts", equipment: "dumbbells" }
+            { name: "Cable pull-throughs", equipment: "bands" }
           ],
-          angle: [
-            { name: "Bent press", equipment: "dumbbells" },
-            { name: "Reverse angled band pullover", equipment: "bands" },
-            { name: "Angled leg lift", equipment: "none" }
+          leg_extension: [
+            { name: "Bird dog", equipment: "bands" },
+            { name: "Single-leg glute bridge", equipment: "none" },
+            { name: "Standing kickbacks", equipment: "bands" }
+          ],
+          hip_pivot: [
+            { name: "One-leg deadlifts", equipment: "dumbbells" },
+            { name: "Curtsy squats", equipment: "none" },
+            { name: "Karate kick toe touches", equipment: "TRX" }
           ]
         }
       },
@@ -155,6 +150,26 @@
         }
       },
       6: {
+        name: "Lower Back",
+        motions: {
+          hyperextension: [
+            { name: "Stool hyperextensions", equipment: "yellowband" },
+            { name: "Arabesque alternate leg/arm lift", equipment: "none" },
+            { name: "One-foot-on-counter hyperextensions", equipment: "none" }
+          ],
+          extension: [
+            { name: "Face-up hip extension (feet in stirrups)", equipment: "TRX" },
+            { name: "Deadlifts", equipment: "bands" },
+            { name: "Deadlifts", equipment: "dumbbells" }
+          ],
+          angle: [
+            { name: "Bent press", equipment: "dumbbells" },
+            { name: "Face-down alternating back extensions", equipment: "none" },
+            { name: "Skyward archers", equipment: "bands" }
+          ]
+        }
+      },
+      7: {
         name: "Chest",
         motions: {
           pushtogether: [
@@ -172,11 +187,11 @@
           fly: [
             { name: "One-arm chest fly", equipment: "bands" },
             { name: "Stool dumbbell fly", equipment: "dumbbells" },
-            { name: "Fly pushups", equipment: "sliders" }
+            { name: "Fly with band around butt", equipment: "ribbon" }
           ]
         }
       },
-      7: {
+      8: {
         name: "Upper Back",
         motions: {
           pulldowns: [
@@ -199,7 +214,7 @@
           ]
         }
       },
-      8: {
+      9: {
         name: "Triceps",
         motions: {
           kickback: [
@@ -221,7 +236,7 @@
           ]
         }
       },
-      9: {
+      10: {
         name: "Biceps",
         motions: {
           curlout: [
@@ -241,7 +256,7 @@
           ]
         }
       },
-      10: {
+      11: {
         name: "Shoulders",
         motions: {
           press: [
@@ -252,14 +267,33 @@
           fly: [
             { name: "Shoulder fly", equipment: "dumbbells" },
             { name: "Three-way shoulder fly", equipment: "bands" },
-            { name: "Top third shoulder flys", equipment: "dumbbells" },
             { name: "Face pulls", equipment: "bands" },
             { name: "Upright rows", equipment: "bands" }
           ],
           shrug: [
             { name: "Shrugs", equipment: "dumbbells" },
-            { name: "Shrugs, standing on stool", equipment: "bands" },
-            { name: "Overhead shrugs", equipment: "golftrainer" }
+            { name: "Shrugs", equipment: "bands" },
+            { name: "Handstand shrugs", equipment: "none" }
+          ]
+        }
+      },
+      12: {
+        name: "Wrists",
+        motions: {
+          adduction: [
+            { name: "Palm-down wrist flexion with slow release", equipment: "dumbbells" },
+            { name: "Finger push-ups side to side", equipment: "none" },
+            { name: "Magic wand raises", equipment: "stick" }
+          ],
+          abduction: [
+            { name: "Palm-up wrist flexion with slow release", equipment: "dumbbells" },
+            { name: "Powerball circles", equipment: "powerball" },
+            { name: "Seated band pull-downs from CVT", equipment: "bands" }
+          ],
+          rotation: [
+            { name: "Dumbbell wrist rotations", equipment: "dumbbells" },
+            { name: "Out-to-up wrist rotations", equipment: "stick" },
+            { name: "In-to-up wrist rotations", equipment: "stick" }
           ]
         }
       }
